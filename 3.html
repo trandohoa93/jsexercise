@@ -1,0 +1,86 @@
+<!-- 3. Viết 1 hàm tính toán số lớn bằng js, với các phép tính(+,-,*,/). Yêu cầu
+- Có 2 tham số (đều lớn hơn 10 chữ số)
+- Kết quả không có sai số
+- Clean code
+- Có comment, giải thích
+- Tạo 1 form UI đơn giản để show lên màn hình.
+Có thể tham khảo https://www.calculator.net/big-number-calculator.html để tham khảo UI & kết quả tính toán -->
+
+<font-awesome-icon :icon="['fas', 'bars']" class="ti-menu" />
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      <div>
+        <label for="input1">X=</label>
+        <input type="number" id="input1" placeholder="nhập số thứ 1" required />
+      </div>
+      <div>
+        <label for="input2">Y=</label>
+        <input type="number" id="input2" placeholder="nhập số thứ 2" required />
+      </div>
+      <button type="button" onclick="add()">Cộng</button>
+      <button type="button" onclick="subtract()">Trừ</button>
+      <button type="button" onclick="multiply()">Nhân</button>
+      <button type="button" onclick="divide()">Chia</button>
+    </form>
+    <div id="result"></div>
+    <script>
+      let c;
+      const add = () => {
+        const a = document.getElementById("input1").value;
+        const b = document.getElementById("input2").value;
+        if (a > Number.MAX_SAFE_INTEGER || b > Number.MAX_SAFE_INTEGER) {
+          result = BigInt(a) + BigInt(b);
+        } else {
+          result = a + b;
+        }
+        document.getElementById("result").innerText = result;
+      };
+      const subtract = () => {
+        const a = document.getElementById("input1").value;
+        const b = document.getElementById("input2").value;
+        if (a > Number.MAX_SAFE_INTEGER || b > Number.MAX_SAFE_INTEGER) {
+          result = BigInt(a) - BigInt(b);
+        } else {
+          result = a - b;
+        }
+        document.getElementById("result").innerText = result;
+      };
+      const multiply = () => {
+        const a = document.getElementById("input1").value;
+        const b = document.getElementById("input2").value;
+        if (a > Number.MAX_SAFE_INTEGER || b > Number.MAX_SAFE_INTEGER) {
+          result = BigInt(a) * BigInt(b);
+        } else {
+          result = a * b;
+        }
+        document.getElementById("result").innerText = result;
+      };
+      const divide = () => {
+        const a = document.getElementById("input1").value;
+        const b = document.getElementById("input2").value;
+        if (a > Number.MAX_SAFE_INTEGER || b > Number.MAX_SAFE_INTEGER) {
+          try {
+            result = BigInt(a) / BigInt(b);
+          } catch (error) {
+            result = "Please provide a non-zero Y value";
+          }
+        } else {
+          try {
+            result = a / b;
+          } catch (error) {
+            result = "Please provide a non-zero Y value";
+          }
+        }
+
+        document.getElementById("result").innerText = result;
+      };
+    </script>
+  </body>
+</html>

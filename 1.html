@@ -1,0 +1,124 @@
+<!-- 1. Khời tạo 1 array có 2000 phần tử có các key như sau (id, name, address, gender, phoneNumber, description, source) sao cho
+name & source không trùng nhau
+- Viết 1 function (searchItemBynameOrSource) để tìm kiếm 1 item dựa trên source hoặc name trong array trên (có thể làm nhiều cách)
+- Tạo 1 form input để show lên màn hình.
+- Cho bối cảnh như sau: giả sử người dùng sẽ dùng hàm này nhiều lần hoặc rất nhiều lần cùng 1 thời điểm, làm thế nào để tối ưu
+hiệu suất của function trên, viết lại function có tên "improveSearchItemBynameOrSource" nếu có. -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Input</title>
+  </head>
+  <body>
+    <h1>Search Item</h1>
+    <form id="searchForm">
+      <label for="searchInput">Search by Name or Source:</label>
+      <input type="text" id="searchInput" name="searchValue" />
+      <button type="submit">Search</button>
+    </form>
+
+    <div id="searchResult"></div>
+
+    <script>
+      function throttle(mainFunction, delay) {
+        let timerFlag = null; // Variable to keep track of the timer
+
+        // Returning a throttled version
+        return (...args) => {
+          if (timerFlag === null) {
+            // If there is no timer currently running
+            mainFunction(...args); // Execute the main function
+            timerFlag = setTimeout(() => {
+              // Set a timer to clear the timerFlag after the specified delay
+              timerFlag = null; // Clear the timerFlag to allow the main function to be executed again
+            }, delay);
+          }
+        };
+      }
+
+      //   const debounce = (mainFunction, delay) => {
+      //     // Declare a variable called 'timer' to store the timer ID
+      //     let timer;
+
+      //     // Return an anonymous function that takes in any number of arguments
+      //     return function (...args) {
+      //       // Clear the previous timer to prevent the execution of 'mainFunction'
+      //       clearTimeout(timer);
+
+      //       // Set a new timer that will execute 'mainFunction' after the specified delay
+      //       timer = setTimeout(() => {
+      //         mainFunction(...args);
+      //       }, delay);
+      //     };
+      //   };
+
+      const myArray = [];
+      for (let i = 1; i < 2000; i++) {
+        myArray.push({
+          id: i,
+          name: "Na",
+          address: "Add",
+          phoneNumber: "09",
+          gender: "ge",
+          description: "des",
+          source: i,
+        });
+      }
+
+      const searchForm = document.getElementById("searchForm");
+      const searchResultDiv = document.getElementById("searchResult");
+
+      const throttledSearch = throttle(handleSearch, 2000);
+      //   const debouncedSearchData = debounce(handleSearch, 200);
+
+      searchForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        throttledSearch();
+      });
+
+      function handleSearch() {
+        console.log("Hello");
+        const formData = new FormData(searchForm);
+        const searchValue = formData.get("searchValue");
+        const searchResult = searchItemBynameOrSource(searchValue);
+        displaySearchResult(searchResult);
+      }
+
+      function searchItemBynameOrSource(searchValue) {
+        const foundByName = myArray.find((item) => item.name === searchValue);
+        const foundBySource = myArray.find(
+          (item) => item.source === parseInt(searchValue)
+        );
+        if (foundByName) {
+          return foundByName;
+        } else if (foundBySource) {
+          return foundBySource;
+        } else {
+          return null;
+        }
+      }
+
+      function displaySearchResult(result) {
+        searchResultDiv.innerHTML = "";
+        if (result) {
+          const resultDiv = document.createElement("div");
+          resultDiv.innerHTML = `
+          <p>ID: ${result.id}</p>
+          <p>Name: ${result.name}</p>
+          <p>Address: ${result.address}</p>
+          <p>Phone Number: ${result.phoneNumber}</p>
+          <p>Gender: ${result.gender}</p>
+          <p>Description: ${result.description}</p>
+          <p>Source: ${result.source}</p>
+        `;
+          searchResultDiv.appendChild(resultDiv);
+        } else {
+          searchResultDiv.textContent = "Item not found.";
+        }
+      }
+    </script>
+  </body>
+</html>

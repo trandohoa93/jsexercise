@@ -1,0 +1,56 @@
+<!-- 2. Tạo 1 form input để nhập số (là số ngày đi làm tiếp theo, không tính t7, CN), hãy viết function trả về kết quả ngày đó là thứ mấy trong tuần.
+ex: nhập 3 sẽ trả về "thứ 5" -->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      <label for="inputDay">Nhập số ngày:</label>
+      <input type="number" id="inputDay" name="inputDay" min="1" required />
+      <button type="button" onclick="getday()">Kiểm tra</button>
+    </form>
+    <div id="result"></div>
+    <script>
+      function getday() {
+        const inputDay = parseInt(document.getElementById("inputDay").value);
+        const currentDate = new Date();
+        let targetDate = new Date(currentDate);
+
+        for (let i = 0; i < inputDay; i++) {
+          targetDate.setDate(targetDate.getDate() + 1);
+          while (targetDate.getDay() === 6 || targetDate.getDay() === 0) {
+            targetDate.setDate(targetDate.getDate() + 1);
+          }
+        }
+
+        const putday = targetDate.getDay();
+
+        let result = "";
+        switch (putday) {
+          case 1:
+            result = "Thứ Hai";
+            break;
+          case 2:
+            result = "Thứ Ba";
+            break;
+          case 3:
+            result = "Thứ Tư";
+            break;
+          case 4:
+            result = "Thứ Năm";
+            break;
+          case 5:
+            result = "Thứ Sáu";
+            break;
+        }
+
+        document.getElementById("result").innerText =
+          "Ngày đi làm tiếp theo là: " + result;
+      }
+    </script>
+  </body>
+</html>
