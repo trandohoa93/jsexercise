@@ -1,10 +1,3 @@
-<!-- 1. Khời tạo 1 array có 2000 phần tử có các key như sau (id, name, address, gender, phoneNumber, description, source) sao cho
-name & source không trùng nhau
-- Viết 1 function (searchItemBynameOrSource) để tìm kiếm 1 item dựa trên source hoặc name trong array trên (có thể làm nhiều cách)
-- Tạo 1 form input để show lên màn hình.
-- Cho bối cảnh như sau: giả sử người dùng sẽ dùng hàm này nhiều lần hoặc rất nhiều lần cùng 1 thời điểm, làm thế nào để tối ưu
-hiệu suất của function trên, viết lại function có tên "improveSearchItemBynameOrSource" nếu có. -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -71,18 +64,16 @@ hiệu suất của function trên, viết lại function có tên "improveSearc
       const searchForm = document.getElementById("searchForm");
       const searchResultDiv = document.getElementById("searchResult");
 
-      const throttledSearch = throttle(handleSearch, 2000);
-      //   const debouncedSearchData = debounce(handleSearch, 200);
-
       searchForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        throttledSearch();
+        improveSearchItemBynameOrSource();
       });
 
+      const improveSearchItemBynameOrSource = throttle(handleSearch, 1500);
+      //   const improveSearchItemBynameOrSource = debounce(handleSearch, 200);
+
       function handleSearch() {
-        console.log("Hello");
-        const formData = new FormData(searchForm);
-        const searchValue = formData.get("searchValue");
+        const searchValue = document.getElementById("searchInput").value;
         const searchResult = searchItemBynameOrSource(searchValue);
         displaySearchResult(searchResult);
       }
