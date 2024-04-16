@@ -1,0 +1,33 @@
+Array.Find
+Ưu điểm:
+- Tiện ích: dễ dàng, gọn nhẹ tìm kiếm phần tử trong mảng
+- Linh hoạt: chỉ dịnh một hàm điều kiện phức tạp để tìm kiếm phần tử
+- Hiệu suất: dừng lại và trả kết quả ngay khi nó tìm thấy phần tử đầu tiên thỏa mãn điều kiện, cải thiện hiệu suất so với việc duyệt qua toàn bộ mảng.
+Nhược điểm: 
+- Chỉ trả về phần tử đầu tiên: array.find chỉ trả về phần tử đầu tiên trong mảng mà thoả mãn điều kiện. 
+Nếu bạn cần tìm tất cả các phần tử, cần sử dụng các phương thức khác như filter.
+- Hỗ trợ trên các trình duyệt mới: không được hỗ trợ trên tất cả các trình duyệt
+
+
+Array.Filter
+Ưu điểm:
+- Dễ đọc và sử dụng: Cú pháp của array.filter khá đơn giản và dễ hiểu. Lọc ra các phần tử một cách dễ dàng dựa trên điều kiện mong muốn.
+- Tạo mảng mới: array.filter tạo ra một mảng mới chứa các phần tử thoả mãn điều kiện, giữ nguyên mảng gốc không bị thay đổi. Điều này làm cho việc xử lý dữ liệu an toàn hơn.
+- Linh hoạt: cung cấp một hàm điều kiện tùy chỉnh cho array.filter, cho phép bạn thực hiện các phép so sánh phức tạp hoặc tùy chỉnh.
+Nhược điểm:
+- Tăng độ phức tạp của mã: Khi sử dụng array.filter cần tạo ra một mảng mới, 
+điều này có thể làm tăng độ phức tạp của mã, đặc biệt là khi cần phải thực hiện nhiều phép lọc trên mảng lớn.
+- Không thay đổi mảng gốc: Mặc dù việc giữ nguyên mảng gốc là lợi ích, nhưng đôi khi bạn có thể muốn 
+thay đổi mảng gốc trực tiếp thay vì tạo ra một bản sao. Trong trường hợp đó, array.filter không phải là lựa chọn phù hợp.
+- Hiệu suất: Trong một số trường hợp, việc sử dụng array.filter có thể không hiệu quả về mặt hiệu suất so với các kỹ 
+thuật lọc khác, đặc biệt là khi bạn chỉ cần tìm một phần tử đầu tiên hoặc muốn thực hiện các phép lọc phức tạp.
+
+Array.Reduce
+Ưu điểm:
+- Linh hoạt: array.reduce cho phép thực hiện các phép gộp phức tạp trên mảng, bao gồm tính tổng, tích, hoặc thậm chí các phép tính tổng hợp phức tạp hơn.
+- Tùy chỉnh: Cung cấp một hàm gộp tuỳ chỉnh để thực hiện bất kỳ loại tính toán nào, mở ra nhiều khả năng xử lý dữ liệu.
+- Hiệu suất: array.reduce cho phép thực hiện các phép tính một cách hiệu quả mà không cần phải tạo ra một biến tạm thời, do đó giảm bớt lượng bộ nhớ được sử dụng và tăng hiệu suất.
+Nhược điểm:
+- Khó hiểu: Đối với người mới học , cú pháp của array.reduce có thể khá phức tạp và khó hiểu so với các phương thức khác như map hoặc filter.
+- Tiềm ẩn lỗi: Việc sử dụng array.reduce có thể dẫn đến các lỗi logic nếu bạn không xử lý các trường hợp đặc biệt như mảng rỗng hoặc không cung cấp giá trị khởi đầu.
+- Không thích hợp cho mọi tình huống: Trong một số trường hợp, việc sử dụng array.reduce có thể làm cho mã trở nên phức tạp hơn và khó đọc hơn so với việc sử dụng các phương pháp khác như forEach hoặc for loop đơn giản.
